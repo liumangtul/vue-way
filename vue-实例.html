@@ -22,7 +22,15 @@
 <script>
     Vue.component('list-item',{
         props:['detail'],
-        template:'<li>{{ detail.text }}</li>'
+        methods:{
+            preFn:function () {
+                console.log(this.detail.text)
+            }
+        },
+        template:'<li>' +
+                    '<span>{{ detail.text }}</span>' +
+                    '<button v-on:click="preFn">顶</button>' +
+                '</li>'
     });
     var app = new Vue({
         el:'#app',
