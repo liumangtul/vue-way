@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title1 }}</h1>
+        <h2 v-html="title2"></h2>
+        <p>{{ mes }}</p>
+        <p v-bind:title="mes">TTT</p>
+        <input type="text" v-model="mes">
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            title1:'default text',
+            title2:'<strong>abc</strong>',
+            arr:[1,2,3],
+            mes:'something...'
+        },
+        created:function () {
+            (function (_this) {
+                setTimeout(function(){
+                    _this.text='get messages... ...';
+                },1000);
+            })(this);
+            console.log(this,this.text);
+        }
+    });
+    vm.$watch('text',function (newT,oldT) {
+       console.log(newT,oldT,this);
+    });
+</script>
+</html>
