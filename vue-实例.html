@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ mes }}
+        <label><input type="checkbox" v-model="lock"/>开关</label>
+        {{ lock }}
+        <ul>
+            <list-item
+                v-for="item in list"
+                v-bind:detail="item"
+                v-bind:key="item.id"
+            ></list-item>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.component('list-item',{
+        props:['detail'],
+        template:'<li>{{ detail.text }}</li>'
+    });
+    var app = new Vue({
+        el:'#app',
+        data:{
+            mes:'mes...',
+            lock:true,
+            list:[
+                {id:1,text:'javascript'},
+                {id:2,text:'html'},
+                {id:3,text:'css'}
+            ]
+        }
+    });
+</script>
+</html>
