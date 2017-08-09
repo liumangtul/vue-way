@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <style>
+        div{background:#ccc;margin: 10px 0;width:200px;padding-left:1em;}
+    </style>
+</head>
+<body>
+    <!--绑定数据-->
+    <div id="app">
+        {{message}}
+    </div>
+    <!--指令绑定数据-->
+    <div id="app2">
+        <span v-bind:title="mes">
+            bind
+        </span>
+    </div>
+
+    <!--判断条件-->
+    <div id="app3">
+        <p v-if="isDisplay">display</p>
+    </div>
+
+    <!--遍历-->
+    <div id="app4">
+        <ul>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ul>
+    </div>
+
+    <!--事件监听器-->
+    <div id="app5">
+        <p>{{ message }}</p>
+        <button v-on:click="changeFn">BTN</button>
+    </div>
+
+    <!--v-model 双向绑定-->
+    <div id="app6">
+        <p>{{ message }}</p>
+        <input type="text" v-model="message">
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'hello Vue world!'
+        }
+    });
+    var app2 = new Vue({
+        el:'#app2',
+        data:{
+            mes:'标题'+new Date()
+        }
+    });
+    var app3 = new Vue({
+        el:'#app3',
+        data:{
+            isDisplay:true
+        }
+    });
+    var app4 = new Vue({
+        el:'#app4',
+        data:{
+            todos:[
+                {
+                    text:'a'
+                },{
+                    text:'bbb'
+                },{
+                    text:'ccc'
+                }
+            ]
+        }
+    });
+    var app5 = new Vue({
+        el:'#app5',
+        data:{
+            message:'old'
+        },
+        methods:{
+            changeFn:function () {
+                this.message = 'new'
+            }
+        }
+    });
+
+    var app6 = new Vue({
+        el:"#app6",
+        data:{
+            message:'bind-message'
+        }
+    });
+</script>
+</html>
