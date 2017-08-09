@@ -12,6 +12,7 @@
             <todo-item
                 v-for="item in list"
                 v-bind:todo="item"
+                v-bind:title="item.text"
                 v-bind:key="item.id"
             >
             </todo-item>
@@ -29,9 +30,9 @@
             mes:'message...',
             list:[
                 { id:1, text:'detail-text1'},
-                { id:2, text:'detail-text1'},
-                { id:3, text:'detail-text1'},
-                { id:4, text:'detail-text1'}
+                { id:2, text:'detail-text2'},
+                { id:3, text:'detail-text3'},
+                { id:4, text:'detail-text4'}
             ]
         }
     });
