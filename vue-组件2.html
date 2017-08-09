@@ -9,18 +9,30 @@
     <div id="app">
         <h1>{{ mes }}</h1>
         <ul>
-            <todo-item></todo-item>
+            <todo-item
+                v-for="item in list"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+            >
+            </todo-item>
         </ul>
     </div>
 </body>
 <script>
     Vue.component('todo-item',{
-        template:'<li>todo-one</li>'
+        props:['todo'],
+        template:'<li>{{ todo.text }}</li>'
     });
     var app = new Vue({
         el:'#app',
         data:{
-            mes:'message...'
+            mes:'message...',
+            list:[
+                { id:1, text:'detail-text1'},
+                { id:2, text:'detail-text1'},
+                { id:3, text:'detail-text1'},
+                { id:4, text:'detail-text1'}
+            ]
         }
     });
 </script>

@@ -1,0 +1,22 @@
+{
+  "name": "vue-way",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liumangtul/vue-way.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liumangtul/vue-way/issues"
+  },
+  "homepage": "https://github.com/liumangtul/vue-way#readme",
+  "devDependencies": {
+    "vue": "^2.4.2"
+  }
+}
