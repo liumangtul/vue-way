@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="index=='1'">
+            <label>
+                user name: <input type="text" placeholder="请输入用户名" key="index">
+            </label>
+        </div>
+        <div v-else>
+            <label>
+                email: <input type="text" placeholder="邮箱地址" key="index">
+            </label>
+        </div>
+        <button v-on:click="changeFn(1)">username</button>
+        <button v-on:click="changeFn(2)">email</button>
+        <!--v-show效果雷同，但是v-show知识切换display，v-if是真正的重载渲染-->
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            loginType:'username',
+            index:1
+        },
+        props:['ind'],
+        methods:{
+            changeFn:function(ind){
+                this.index=ind;
+            }
+        }
+    });
+</script>
+</html>

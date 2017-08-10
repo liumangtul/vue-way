@@ -6,6 +6,19 @@
     <script src="../js/vue.js"></script>
 </head>
 <body>
-
+    <div id="app">
+        <h1 v-if="type=='A'">A</h1>
+        <h1 v-else-if="type=='B'">B</h1>
+        <h1 v-else-if="type=='C'">C</h1>
+        <h1 v-else>else</h1>
+    </div>
 </body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            type:'A'
+        }
+    });
+</script>
 </html>

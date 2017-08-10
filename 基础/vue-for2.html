@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        ul{border:1px solid red;}
+        li{background:#ccc;margin:10px 0;}
+    </style>
+</head>
+<body>
+    <div id="app">
+       <ul>
+           <template v-for="item in items">
+               <li>{{item.name}}</li>
+               <li>{{item.id}}</li>
+           </template>
+       </ul>
+        <ul>
+            <li v-for="val in myMes">{{val}}</li>
+        </ul>
+        <ul>
+            <li v-for="(val,key,index) in myMes">{{ index }}. {{ key }} : {{ val }}</li>
+        </ul>
+        <div>
+            <b v-for="num in 10">{{ num }}, </b>
+        </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            myMes:{
+                name:'wang yan',
+                age:18,
+                job:'FE'
+            },
+            items:[
+                {
+                    id:11,
+                    name:'wang yan'
+                },{
+                    id:12,
+                    name:'li peng'
+                },{
+                    id:13,
+                    name:'tong tong'
+                },{
+                    id:14,
+                    name:'miao miao'
+                }
+            ]
+        }
+    });
+</script>
+</html>
