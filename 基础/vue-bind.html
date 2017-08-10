@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .titleA{color:red;}
+        .title{color:pink;}
+        .active{background:red;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1 v-bind:class="ctitle">{{ title }}</h1>
+        <h1 v-bind:class="cls">title1</h1>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            title:'标题1',
+            ctitle:'titleA'
+        },
+        //计算属性
+        computed:{
+            cls:function(){
+                return {
+                    active:true,
+                    title:false
+                }
+            }
+        }
+    })
+</script>
+</html>
