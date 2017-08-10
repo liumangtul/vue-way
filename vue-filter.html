@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 v-bind:title="article.title | copyright">Title Hover Show</h1>
+        <p>{{ article.detail | copyright('arg1',arg) }}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            article:{
+                title:'vTITLE',
+                detail:'vDetail'
+            },
+            arg:'****'
+        },
+        filters:{
+            copyright:function(val,arg1,arg2){
+                console.log(val);
+                return val+'--过滤器'+arg1+arg2;
+            }
+        }
+    });
+</script>
+</html>
