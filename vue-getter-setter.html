@@ -3,8 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/vue.js"></script>
 </head>
 <body>
-
+    <div id="app">
+        <h1>{{ count }}</h1>
+        <h2>{{ add }}</h2>
+        <br>
+        <p>{{ firstName }}</p>
+        <p>{{ lastName }}</p>
+        <p>{{ fullName }}</p>
+    </div>
 </body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            count:1,
+            firstName:'wang',
+            lastName:'yan'
+        },
+        computed:{
+            add:function () {
+                return this.count+1;
+            },
+            /*fullName:function(){
+                return this.firstName+' '+this.lastName;
+            }*/
+            fullName:{
+                get:function(){
+                    return this.firstName+' '+this.lastName
+                },
+                set:function(val){
+                    this.firstName=val.split(' ')[0];
+                    this.lastName=val.split(' ')[1];
+                }
+            }
+        }
+    });
+</script>
 </html>
