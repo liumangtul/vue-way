@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table{width:200px;height:200px;}
+        .table1{background:#ccc;}
+        .table2{background:#f40;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-component1></my-component1>
+        <my-component2></my-component2>
+        <!--出错-->
+        <table class="table1">
+            <my-table></my-table>
+        </table>
+        <!--正确方式-->
+        <table class="table2">
+            <tbody is="my-table"></tbody>
+        </table>
+    </div>
+</body>
+<script>
+    //注册全局组件
+    Vue.component('my-component1',{
+        template:'<h1>My-Component1</h1>'
+    });
+
+    Vue.component('my-table',{
+        template:'<tbody><tr><td>{{ mes }}</td><td @click="countFn"><button>{{ count }}</button></td></tr></tbody>',
+        /*data:{
+            mes:'hello'
+        }*/
+        data:function(){
+            return {
+                mes:'hello',
+                count:1
+            }
+        },
+        methods:{
+            countFn:function(){
+                this.count++;
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        //局部组件
+        components:{
+            'my-component2':{
+                template:'<h2>My-Component2</h2>'
+            }
+        }
+    });
+</script>
+</html>

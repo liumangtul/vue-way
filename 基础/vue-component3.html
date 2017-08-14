@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        #app{padding:10px;background:yellow;border:1px solid #000;}
+        .parent-box{background:#ccc;padding:10px;width:800px;margin:0 auto;}
+        .child-box{background:#f40;width:500px;margin:0 auto;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>来自vm：{{ count }} <button @click="countAdd">count++</button></p>
+
+        <my-parent-component :parent-count="count"></my-parent-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-parent-component',{
+        //props:['parent-count'],
+        props:{
+            'parent-count':Number
+        },
+        template:'<div class="parent-box">' +
+                    '<p>{{ parentCount }} <button @click="parentCountAdd">parentCount++</button></p>' +
+                    '<p>{{ counter1 }} <button @click="counter1Fn">counter1++</button></p>' +
+                    '<h1>父组件</h1>' +
+                    '<my-child-component :child-count="parentCount"></my-child-component>'+
+                '</div>',
+        methods:{
+            parentCountAdd:function () {
+               console.log(this.parentCount);
+            },
+            counter1Fn:function(){
+                this.counter1++;
+            }
+        },
+        data:function () {
+            return {
+                counter1:this.parentCount
+            }
+        }
+    });
+    Vue.component('my-child-component',{
+        props:['child-count'],
+        template:'<div class="child-box">' +
+                    '<h2>子组件</h2>' +
+                    '<p>{{ childCount }} <button @click="childCountAdd">childCount++</button></p>' +
+                '</div>',
+        methods:{
+            childCountAdd:function () {
+                console.log(this.childCount);
+            }
+        }
+    });
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            count:0
+        },
+        methods:{
+            countAdd:function () {
+                this.count++;
+            }
+        }
+    });
+</script>
+</html>

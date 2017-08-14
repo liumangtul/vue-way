@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ text }}
+        <my-parent :p-text="text"></my-parent>
+    </div>
+</body>
+<script>
+    /*
+    * v-bind p-text 来自父级作用域的data text
+    * v-bind message 来自父组件的parentData
+    * */
+    Vue.component('my-parent',{
+        props:['pText'],
+        data:function () {
+          return {
+              parentData:'Vue world!'
+          }
+        },
+        template:'<div class="parent">' +
+                    '<h2 @click="clk">{{ pText }}</h2>' +
+                    '<my-child class="child" :message="parentData"></my-child>' +
+                '</div>',
+        methods:{
+            clk:function () {
+                this.pText='aaa';
+            }
+        }
+    });
+    Vue.component('my-child',{
+        props:['message'],
+        template:'<h1>{{ message }}</h1>'
+    });
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            text:'good!!'
+        }
+    });
+</script>
+</html>

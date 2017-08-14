@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        h1,h2{text-align:center;font-size:20px;line-height:30px;padding-top:5px;}
+        #app{background:#ccc;width:300px;margin:10px auto;padding:10px;}
+        .component{width:200px;margin:10px auto;background:#ff4400;}
+        button{font-size:20px;margin:10px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Root App</h1>
+        <my-component v-on:listen="listenFn"></my-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-component',{
+        template:'<div class="component">' +
+                    '<h2>子组件</h2>' +
+                    '<button v-on:click="touch">BUTTON</button>' +
+                '</div>',
+        methods:{
+            touch:function () {
+                this.$emit('listen');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        methods:{
+            listenFn:function () {
+                alert('收到监听数据');
+            }
+        }
+    });
+</script>
+</html>
