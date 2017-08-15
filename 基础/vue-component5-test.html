@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        button{padding:10px;font-size:20px;font-weight:bold;color:#666;cursor:pointer;}
+        #app{background:#ccc;padding:10px;width:300px;margin:0 auto;}
+        .my-component{background:#f40;padding:10px;width:200px;margin:10px auto;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Root:{{ total }}</h1>
+        <button
+                v-on:click="totalAdd"
+        >total-add</button>
+        <my-component
+                v-bind:parent-total="total"
+                v-on:child-count="totalAdd"
+        ></my-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-component',{
+        props:['parent-total'],
+        template:'<div class="my-component">' +
+                    '<h3>increment:{{ counter }},{{ parentTotal }}</h3>' +
+                    '<button v-on:click="add">component-add</button>' +
+                '</div>',
+        data:function () {
+            return {
+                counter:0
+            }
+        },
+        methods:{
+            add:function () {
+                this.counter++;
+                //去找组件tag内的v-on的child-count所要执行的函数
+                this.$emit('child-count');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            total:0
+        },
+        methods:{
+            totalAdd:function () {
+                this.total++;
+            }
+        }
+    });
+</script>
+</html>
