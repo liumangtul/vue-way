@@ -9,8 +9,8 @@
     <div id="app">
         <h1>{{ message }}</h1>
         <h2>{{ message | filterMes }}</h2>
-        <h3>{{ reversedMes }}</h3>
-        <h4>{{ reversedMes | filterMes }}</h4>
+        <h3>{{ reversedMes() }}</h3>
+        <h4>{{ reversedMes() | filterMes }}</h4>
     </div>
 </body>
 <script>
@@ -24,10 +24,17 @@
                 return val+' 过滤后...'
             }
         },
-        //计算属性
-        computed:{
+        //计算属性--基于他们的依赖进行缓存的,只有在相关依赖(vm.message)发生改变时才会重新求值
+        //只要message不发生变化,多次访问reversedMes计算属性,会返回之前的计算结果,不会重新执行.
+        /*computed:{
             reversedMes:function(){
-                return this.message.split('').reverse().join('');
+                return this.message.split('').reverse().join('')+' '+parseInt(Math.random()*100);
+            }
+        }*/
+        //methods--始终会执行该函数
+        methods:{
+            reversedMes:function(){
+                return this.message.split('').reverse().join('')+' '+parseInt(Math.random()*100);
             }
         }
     })

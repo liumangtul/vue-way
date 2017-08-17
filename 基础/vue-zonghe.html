@@ -3,8 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../js/vue.js"></script>
 </head>
 <body>
-
+    <div id="app">
+        <h1 v-bind:title="message | filterMessage">{{ message +' Yes' }}</h1>
+        <button v-bind:disabled="isShow">button</button>
+        <b v-once>{{ message | filterMessage }}</b>
+        <h2 v-if="isShow">{{ subTitle }}</h2>
+        <ul>
+            <li v-for="item in list">
+                <p><b>{{ item.id }} .</b> {{ item.name }}</p>
+                <input type="text" v-model="item.name">
+            </li>
+        </ul>
+        <button v-on:click="reverseMessage">reverse</button>
+        <my-component></my-component>
+        <ul>
+            <todo-item
+                v-for="item in list"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+            ></todo-item>
+        </ul>
+    </div>
 </body>
+<script>
+    Vue.component('my-component',{
+        template:'<div>组件</div>'
+    });
+
+    Vue.component('todo-item',{
+        props:['todo'],
+        template:'<li>' +
+                    '<p><b>{{ todo.id }}. </b> {{ todo.name | filterName }}</p>' +
+                '</li>',
+        filters:{
+            filterName:function(val){
+                return '名称: '+val;
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            message:'Hello Vue !'+parseInt(Math.random()*100),
+            subTitle:'显示我了吗?',
+            isShow:true,
+            list:[
+                {
+                    id:1,
+                    name:'javascript'
+                },{
+                    id:2,
+                    name:'HTML'
+                },{
+                    id:3,
+                    name:'CSS'
+                }
+            ]
+        },
+        methods:{
+            reverseMessage:function(){
+                this.message = this.message.split(' ').reverse().join(' ');
+            }
+        },
+        //实例被创建之后调用--实例生命周期
+        created:function(){
+        },
+        filters:{
+            filterMessage:function(val){
+                return val+' 过滤后...';
+            }
+        }
+    });
+</script>
 </html>

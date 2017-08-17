@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../js/vue.js"></script>
 </head>
 <body>
-
+    <div id="app">
+        <h1>{{ message }}</h1>
+    </div>
 </body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            message:'Vue 生命周期:beforeCreate,created,beforeMount,mounted,(beforeUpdate,updated),beforeDestroy,destroyed'+parseInt(Math.random()*100)
+        },
+        mounted:function(){
+            alert('2.mounted');
+        },
+        updated:function(){
+            alert('updated');
+        },
+        destroyed:function(){
+            alert('destroyed');
+        },
+        created:function(){
+            alert('1.created');
+        }
+    });
+</script>
 </html>
