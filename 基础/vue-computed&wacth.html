@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ fullName }}</h1>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            firstName:'Wang',
+            lastName:'Yan'/*,
+            fullName:'Wang Yan'*/
+        },
+        //watch和computed相比，computed更好用
+        /*watch:{
+            firstName:function(val){
+                this.fullName = val + ' ' + this.lastName;
+            },
+            lastName:function(val){
+                this.fullName = this.firstName + ' ' + val;
+            }
+        }*/
+        computed:{
+            fullName:function(){
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+    })
+</script>
+</html>

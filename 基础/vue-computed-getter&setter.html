@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ fullName }}</h1>
+        <p>姓:{{ firstName }}</p>
+        <p>名:{{ lastName }}</p>
+        <input type="text" v-model="firstName" />
+        <input type="text" v-model="lastName" />
+        <input type="text" v-model="fullName" />
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            firstName:'Wang',
+            lastName:'Yan'
+        },
+        /*computed:{
+            fullName:function(){
+                return this.firstName + ' ' + this.lastName;
+            }
+        }*/
+        computed:{
+            fullName:{
+                //getter
+                //返回值为fullName的值
+                get:function(){
+                    return this.firstName + ' ' + this.lastName;
+                },
+                //setter
+                //当进行设置vm.fullName的值时,要做的操作
+                set:function(newVal){
+                    var name = newVal.split(' ');
+                    this.firstName=name[0];
+                    this.lastName=name[1];
+                }
+            }
+        }
+    })
+</script>
+</html>

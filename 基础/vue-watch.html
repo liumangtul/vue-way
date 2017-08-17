@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>question: <input type="text" v-model="question"></p>
+        <p>{{ answer }}</p>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            question:'',
+            answer:'没有问题'
+        },
+        watch:{
+            question:function(newVal){
+                this.answer = 'Waitting for you ... ...';
+                setTimeout(function(){
+                    vm.getAnswer();
+                },1000);
+            }
+        },
+        methods:{
+            getAnswer:function(){
+                vm.answer = 'Thinking... ...';
+                setTimeout(function(){
+                    vm.answer = '答案'+parseInt(Math.random()*100);
+                },1500);
+            }
+        }
+    });
+</script>
+</html>
