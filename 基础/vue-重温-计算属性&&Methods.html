@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h2>{{ message | filterMes }}</h2>
+        <h3>{{ reversedMes }}</h3>
+        <h4>{{ reversedMes | filterMes }}</h4>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            message:'Hello!'
+        },
+        filters:{
+            filterMes:function(val){
+                return val+' 过滤后...'
+            }
+        },
+        //计算属性
+        computed:{
+            reversedMes:function(){
+                return this.message.split('').reverse().join('');
+            }
+        }
+    })
+</script>
+</html>
