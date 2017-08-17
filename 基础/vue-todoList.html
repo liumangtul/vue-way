@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        #app{width:500px;margin:10px auto;}
+
+        #add{border:1px solid #ccc;margin-bottom:10px;overflow:hidden;width:100%;}
+        #add input{width:80%;height:50px;border-width:0px;font-size:20px;line-height:50px;text-indent:1em;vertical-align: top;float:left;outline:none;}
+        #add button{font-size:25px;line-height:50px;width:20%;border-width:0px;height:50px;background:#9ecc96;color:#fff;vertical-align: top;float:left;outline: none;cursor:pointer;}
+        ul{list-style: none;border:1px solid #9ecc96;}
+        li{padding:10px;}
+        li:nth-child(odd){
+            color:#fff;
+            background: #9ecc96;
+        }
+        li:nth-child(even){
+            color: #9ecc96;
+            background: #fff;
+        }
+        li b{margin-left:10px;}
+        li span{width:180px;display:inline-block;}
+        li button{margin-left:10px;font-size:20px;line-height:30px;padding:0 10px;}
+        li i{font-weight: bold;display:inline-block;width:50px;margin-right:100px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <add-todo
+            v-bind:list="list"
+        ></add-todo>
+        <ul>
+            <li
+                is="todo-item"
+                v-for="(item,index) in list"
+                v-bind:item="item"
+                v-bind:index="index"
+                v-bind:key="item.id"
+                v-on:del="list.splice(index,1)"
+            ></li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.component('add-todo',{
+        props:['list'],
+        template:'<div id="add">' +
+                    '<input type="text" placeholder="名称" v-model="newBook">' +
+                    '<button @click="add">add</button>' +
+                '</div>',
+        data:function () {
+            return {
+                newBook:''
+            };
+        },
+        methods:{
+            add:function(){
+                console.log(this.newBook);
+                if(this.newBook==''){
+                    alert('newBook is null');
+                    return;
+                }
+                this.list.push({
+                    id:parseInt(Math.random()*100),
+                    book:this.newBook
+                });
+                this.newBook='';
+                console.log(this.list)
+            }
+        }
+    });
+
+    Vue.component('todo-item',{
+        props:['item','index'],
+        template:'<li>' +
+                    '<b>{{ index+1 }}. </b>' +
+                    '<span>{{ item.book }}</span>' +
+                    '<i> id: {{ item.id }}</i>' +
+                    '<button @click="remove">remove</button>' +
+                '</li>',
+        methods:{
+            remove:function(){
+                this.$emit('del');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list:[
+                {
+                    id:1,
+                    book:'javascript高级程序设计'
+                },{
+                    id:2,
+                    book:'javascript权威指南'
+                },{
+                    id:3,
+                    book:'javascript设计模式'
+                },{
+                    id:4,
+                    book:'深入React技术栈'
+                },{
+                    id:5,
+                    book:'深入全出NodeJs'
+                }
+            ]
+        }
+    })
+</script>
+</html>
