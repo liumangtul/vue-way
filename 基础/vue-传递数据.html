@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>
+            {{ login }}
+            <button @click="countAdd">parent btn</button>
+        </h1>
+        <my-header
+            v-on:ecount="countAdd"
+            :count="login"
+        ></my-header>
+    </div>
+</body>
+<script>
+    Vue.component('my-header',{
+        /*不能修改传进来的props 数据*/
+        template:'<div>' +
+                    '<p>incount: {{ incount }}</p>' +
+                    '<p>login count: {{ count }}</p>' +
+                    '<button @click="loginFn">Login</button>' +
+                '</div>',
+        props:['count'],
+        methods:{
+            loginFn:function(){
+                this.incount++;
+                //this.count[0]=this.incount;
+                this.$emit('ecount');
+            }
+        },
+        data:function(){
+            return {
+                incount:this.count[0]
+            };
+        }
+    });
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            login:[2]
+        },
+        methods:{
+            countAdd:function(){
+                var count=this.login[0];
+                count++;
+                this.login.splice(0,1,count);
+            }
+        }
+    })
+</script>
+</html>
